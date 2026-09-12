@@ -22,7 +22,7 @@
   }
 
   ::selection {
-    background: #3b82f6;
+    background: #589BF9;
     color: #fff;
   }
 
@@ -38,7 +38,7 @@
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3b82f6;
+    background: #589BF9;
   }
 }
 
@@ -87,7 +87,7 @@
   .crosshair::after {
     content: '';
     position: absolute;
-    background: rgba(59, 130, 246, 0.4);
+    background: rgba(88, 155, 249, 0.4);
   }
   .crosshair::before {
     left: 50%;

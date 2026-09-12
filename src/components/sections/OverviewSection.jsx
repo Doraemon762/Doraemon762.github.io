@@ -25,14 +25,22 @@ function Paragraph({ children }) {
  */
 function ImageFrame({ src, label }) {
   return (
-    <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden">
+    <div className="group relative aspect-[4/3] w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden transition-colors duration-300 hover:border-brandLine">
       {src ? (
         <img src={src} alt="" className="w-full h-full object-cover" />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-xs font-mono text-mute uppercase tracking-[0.3em]">{label}</span>
+          <span className="text-xs font-mono text-mute uppercase tracking-[0.3em] transition-colors duration-300 group-hover:text-brand/70">
+            {label}
+          </span>
         </div>
       )}
+
+      {/* Brand hover wash — a flat 5% tint, no gradient and no glow */}
+      <span
+        className="pointer-events-none absolute inset-0 bg-brandSoft opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden="true"
+      />
     </div>
   )
 }
@@ -43,8 +51,8 @@ function ImageFrame({ src, label }) {
 
 export default function OverviewSection() {
   return (
-    <section id="overview" className="relative py-32 md:py-40 scroll-mt-24">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="relative py-32 md:py-40">
+      <div id="overview" className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid gap-12 lg:gap-16 items-center md:grid-cols-2 lg:grid-cols-[1.15fr_1fr]">
           {/* Left — copy */}
           <div>

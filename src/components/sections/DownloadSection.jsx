@@ -18,10 +18,13 @@ export default function DownloadSection() {
   const href = panel.cta.url ?? '#'
 
   return (
-    /* id="download" — the nav "Download" link points at #download.
-       scroll-mt-24 keeps the title clear of the fixed 64px navbar on jump. */
-    <section id="download" className="relative py-32 md:py-40 scroll-mt-24">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="relative py-32 md:py-40">
+      {/* id="download" — the nav "Download" link points at #download.
+          Anchor is on the content wrapper: the section's top padding is
+          invisible, so anchoring the section itself pushed the heading down
+          to ~59% of the viewport. Navbar offset comes from
+          html { scroll-padding-top }. */}
+      <div id="download" className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
         {/* Small section label */}
         <Reveal className="text-xs font-mono tracking-[0.3em] text-mute">{download.label}</Reveal>
 
@@ -49,14 +52,16 @@ export default function DownloadSection() {
               </p>
             </div>
 
-            {/* Right: CTA — opens in a new tab; subtle hover feedback only */}
+            {/* Right: CTA — opens in a new tab.
+                Black/white by default; the brand colour appears on hover only,
+                so the page never shows a large blue button. */}
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex shrink-0 items-center gap-2 text-sm font-mono uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white"
+              className="group inline-flex shrink-0 items-center gap-2 text-sm font-mono uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-brand"
             >
-              <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-white/40">
+              <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-brand/60">
                 {panel.cta.label}
               </span>
               <span className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">

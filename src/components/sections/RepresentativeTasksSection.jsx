@@ -14,19 +14,27 @@ import Reveal from '../ui/Reveal'
  */
 function TaskVideo({ src, label }) {
   return (
-    <div className="relative aspect-video w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden">
+    <div className="relative aspect-video w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden transition-colors duration-300 group-hover:border-brandLine">
       {src ? (
         <video src={src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-          <span className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white/60">
+          <span className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white/60 transition-colors duration-300 group-hover:border-brandLine group-hover:text-brand">
             <svg viewBox="0 0 24 24" className="w-5 h-5 translate-x-[1px]" aria-hidden="true">
               <path d="M8 5v14l11-7z" fill="currentColor" />
             </svg>
           </span>
-          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-mute">{label}</span>
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-mute transition-colors duration-300 group-hover:text-brand/70">
+            {label}
+          </span>
         </div>
       )}
+
+      {/* Brand hover wash — a flat 5% tint, no gradient and no glow */}
+      <span
+        className="pointer-events-none absolute inset-0 bg-brandSoft opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden="true"
+      />
     </div>
   )
 }
@@ -37,10 +45,12 @@ function TaskVideo({ src, label }) {
 
 function TaskCell({ task, placeholderLabel }) {
   return (
-    <div className="flex flex-col">
-      {/* Ordinal + English task name — the cell heading */}
+    /* `group` scopes the hover tint to this cell only */
+    <div className="group flex flex-col">
+      {/* Ordinal + English task name — the cell heading.
+          Only the ordinal number carries the brand colour. */}
       <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-white">
-        {task.index} / {task.title}
+        <span className="text-brand">{task.index}</span> / {task.title}
       </h3>
 
       {/* Video — the main visual element of the cell */}
@@ -65,9 +75,10 @@ export default function RepresentativeTasksSection() {
   const { tasks, placeholderLabel } = representativeTasks
 
   return (
-    /* id="tasks" — page order places this between Multimodal and Download */
-    <section id="tasks" className="relative py-32 md:py-40 scroll-mt-24">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="relative py-32 md:py-40">
+      {/* id="tasks" — page order places this between Multimodal and Download.
+          Anchor is on the content wrapper (skips the section's top padding). */}
+      <div id="tasks" className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
         {/* Small section label */}
         <Reveal className="text-xs font-mono tracking-[0.3em] text-mute">
           {representativeTasks.label}

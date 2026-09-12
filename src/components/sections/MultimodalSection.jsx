@@ -13,16 +13,22 @@ import Reveal from '../ui/Reveal'
  */
 function ModalityVideo({ src, label }) {
   return (
-    <div className="relative aspect-video w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden">
+    <div className="relative aspect-video w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden transition-colors duration-300 group-hover:border-brandLine">
       {src ? (
         <video src={src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-mute">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-mute transition-colors duration-300 group-hover:text-brand/70">
             {label}
           </span>
         </div>
       )}
+
+      {/* Brand hover wash — a flat 5% tint, no gradient and no glow */}
+      <span
+        className="pointer-events-none absolute inset-0 bg-brandSoft opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden="true"
+      />
     </div>
   )
 }
@@ -34,10 +40,12 @@ function ModalityVideo({ src, label }) {
  */
 function ModalityColumn({ card, placeholderLabel }) {
   return (
-    <div className="flex flex-col">
-      {/* Ordinal + English name — the column heading */}
+    /* `group` scopes the hover tint to this column only */
+    <div className="group flex flex-col">
+      {/* Ordinal + English name — the column heading.
+          Only the ordinal number carries the brand colour; the title stays white. */}
       <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-white">
-        {card.index} / {card.title}
+        <span className="text-brand">{card.index}</span> / {card.title}
       </h3>
 
       {/* Video */}
@@ -60,9 +68,11 @@ function ModalityColumn({ card, placeholderLabel }) {
 
 export default function MultimodalSection() {
   return (
-    /* id="dataset" — the nav "Dataset" link points at #dataset */
-    <section id="dataset" className="relative py-32 md:py-40 scroll-mt-24">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="relative py-32 md:py-40">
+      {/* id="dataset" — the nav "Dataset" link points at #dataset.
+          Anchor is on the content wrapper so it skips the section's top
+          padding; the navbar offset comes from html { scroll-padding-top }. */}
+      <div id="dataset" className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
         {/* Small section label */}
         <Reveal className="text-xs font-mono tracking-[0.3em] text-mute">{multimodal.label}</Reveal>
 

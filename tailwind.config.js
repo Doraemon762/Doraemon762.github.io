@@ -7,8 +7,15 @@ export default {
         ink: '#0a0a0a',
         ink2: '#111111',
         ink3: '#1a1a1a',
-        accent: '#3b82f6',
-        accentLight: '#60a5fa',
+        /* Brand highlight — used sparingly (~10%): hero numerals,
+           ordinal numbers, CTA hover, subtle card hover. */
+        brand: '#589BF9',
+        brandSoft: 'rgba(88,155,249,0.05)',
+        brandLine: 'rgba(88,155,249,0.4)',
+        /* `accent` is the legacy name for the same highlight colour.
+           Both point at #589BF9 so the page never shows two blues. */
+        accent: '#589BF9',
+        accentLight: '#8ab8fb',
         silver: '#c0c0c0',
         mute: '#8a8a8a',
       },

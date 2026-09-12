@@ -26,7 +26,6 @@ export const nav = {
     { label: 'Overview', href: '#overview' },
     { label: 'Dataset', href: '#dataset' },
     { label: 'Download', href: '#download' },
-    { label: 'Team', href: '#team' },
   ],
 }
 
@@ -54,7 +53,10 @@ export const footer = {
  *   - Any later section that needs the same figures
  */
 export const datasetStats = {
-  hours: { value: '1000', unit: '', label: 'Hour' },
+  /* `accent: true` → this figure is drawn in the brand highlight.
+     Only the headline "1000" is highlighted; every other figure stays
+     plain white/grey so the blue remains ~10% of the page. */
+  hours: { value: '1000', unit: '', label: 'Hour', accent: true },
   locations: { value: '100', unit: '+', label: 'Location' },
   tasks: { value: '500', unit: '+', label: 'Task' },
   people: { value: '200', unit: '+', label: 'People' },
@@ -68,6 +70,14 @@ export const hero = {
   /* Top corner mono labels */
   liveLabel: 'LIVE — EMBODIED DATA STREAM',
   recLabel: 'REC / 2026',
+
+  /**
+   * Cover image — rendered in the lower-middle of the hero as an ambient
+   * background layer. HeroSection feathers its edges into the black page
+   * with a CSS radial mask; the image's low opacity doubles as the black
+   * scrim. Set to null to remove the layer.
+   */
+  imageSrc: '/images/hero/cover.png',
 
   /* Pill above the title */
   pretitle: 'A 1000-hour synchronized human embodied dataset',
