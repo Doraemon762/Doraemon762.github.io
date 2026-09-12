@@ -1,0 +1,101 @@
+import { multimodal } from '../../data/site'
+import Reveal from '../ui/Reveal'
+
+/* ------------------------------------------------------------------ */
+/* Modality column                                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Video area — the dominant visual element of each column.
+ * Renders a real looping clip as soon as `src` is set; until then it falls
+ * back to a flat rectangle. No play button: the clip is data footage, so it
+ * autoplays muted when it exists.
+ */
+function ModalityVideo({ src, label }) {
+  return (
+    <div className="relative aspect-video w-full bg-gradient-to-br from-ink2 to-ink3 border border-white/10 overflow-hidden">
+      {src ? (
+        <video src={src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-mute">
+            {label}
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * One modality column — no panel, no background, no card.
+ * Hierarchy comes from typography, spacing and hairlines only:
+ *   ordinal + English heading → video → description → tags
+ */
+function ModalityColumn({ card, placeholderLabel }) {
+  return (
+    <div className="flex flex-col">
+      {/* Ordinal + English name — the column heading */}
+      <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-white">
+        {card.index} / {card.title}
+      </h3>
+
+      {/* Video */}
+      <div className="mt-8">
+        <ModalityVideo src={card.videoSrc} label={placeholderLabel} />
+      </div>
+
+      {/* Description */}
+      <p className="mt-6 text-sm leading-relaxed text-white/60">{card.desc}</p>
+
+      {/* Tags */}
+      <p className="mt-6 text-[10px] font-mono uppercase tracking-widest text-mute">{card.tags}</p>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* 04 — Multimodal Data                                                */
+/* ------------------------------------------------------------------ */
+
+export default function MultimodalSection() {
+  return (
+    /* id="dataset" — the nav "Dataset" link points at #dataset */
+    <section id="dataset" className="relative py-32 md:py-40 scroll-mt-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Small section label */}
+        <Reveal className="text-xs font-mono tracking-[0.3em] text-mute">{multimodal.label}</Reveal>
+
+        {/* Main title */}
+        <Reveal
+          as="h2"
+          delay={1}
+          className="mt-4 font-black tracking-tight leading-[1.2] text-[clamp(1.25rem,4vw,3rem)]"
+        >
+          {multimodal.title}
+        </Reveal>
+
+        {/* Description */}
+        <Reveal delay={2} className="mt-6">
+          <p className="max-w-xl text-base text-white/70">{multimodal.description}</p>
+        </Reveal>
+
+        {/* Three columns — hairline dividers sit in the middle of the gap so
+            all three columns keep exactly the same content width. */}
+        <div className="mt-20 grid gap-14 md:gap-8 md:grid-cols-3">
+          {multimodal.cards.map((card, i) => (
+            <Reveal key={card.titleEn} delay={i + 3} className="relative">
+              {i > 0 && (
+                <span
+                  className="hidden md:block absolute top-0 bottom-0 -left-4 w-px bg-white/10"
+                  aria-hidden="true"
+                />
+              )}
+              <ModalityColumn card={card} placeholderLabel={multimodal.placeholderLabel} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

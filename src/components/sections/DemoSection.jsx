@@ -8,9 +8,10 @@ import Reveal from '../ui/Reveal'
 /**
  * 16:9 frame that will hold the one-minute demo reel.
  *
- * Renders a real <video> as soon as `demo.videoSrc` is set; until then it
- * falls back to a static rectangle placeholder. Swapping in the footage
- * later needs no layout change — only a path in site.js.
+ * Preserves the original behaviour: renders a real <video> with native
+ * controls as soon as `demo.videoSrc` is set; until then it falls back to a
+ * static rectangle placeholder. Swapping in the footage later needs no
+ * layout change — only a path in site.js.
  */
 function VideoFrame({ src, label }) {
   return (
@@ -36,34 +37,39 @@ function VideoFrame({ src, label }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* 02 — Demo                                                           */
+/* 02 — Demo / Live Capture                                            */
 /* ------------------------------------------------------------------ */
 
+/**
+ * English only. Restyled to match the Multimodal Data and Open Source
+ * modules: small label → large two-word title → content. The video frame
+ * and its logic are unchanged; only the header hierarchy, alignment,
+ * spacing and typography were adjusted to the shared design language.
+ */
 export default function DemoSection() {
   return (
-    <section id="demo" className="relative pt-16 md:pt-20 pb-32 md:pb-40">
+    /* id="demo" — same vertical rhythm and nav-offset as sibling modules */
+    <section id="demo" className="relative py-32 md:py-40 scroll-mt-24">
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Title — H2 level, one step below the hero H1 (which caps at 90px).
-            "DEMO" is only 4 glyphs, so it stays narrow at any size:
-            ≈138px wide even at the 3rem cap, far inside the 1200px box. */}
+        {/* Small section label */}
+        <Reveal className="text-xs font-mono tracking-[0.3em] text-mute">{demo.label}</Reveal>
+
+        {/* Main title — the dominant visual element of this block */}
         <Reveal
           as="h2"
-          className="text-center font-black tracking-tight leading-[1.2] text-[clamp(1.25rem,4vw,3rem)]"
+          delay={1}
+          className="mt-4 font-black tracking-tight leading-[1.2] text-[clamp(1.25rem,4vw,3rem)]"
         >
           {demo.title}
         </Reveal>
 
-        {/* One-line description — same type as the hero subtitle */}
-        <Reveal
-          as="p"
-          delay={1}
-          className="text-center mt-6 md:mt-8 text-lg md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-times"
-        >
-          {demo.description}
+        {/* One-line description — restrained, left-aligned */}
+        <Reveal delay={2} className="mt-6">
+          <p className="max-w-xl text-base text-white/70">{demo.description}</p>
         </Reveal>
 
-        {/* Demo reel — 16:9, inset from the section's max width */}
-        <Reveal delay={2} className="mt-16 md:mt-20 max-w-5xl mx-auto">
+        {/* Demo reel — full content width, 16:9, sits under the title */}
+        <Reveal delay={3} className="mt-16 md:mt-20">
           <VideoFrame src={demo.videoSrc} label={demo.placeholderLabel} />
         </Reveal>
       </div>

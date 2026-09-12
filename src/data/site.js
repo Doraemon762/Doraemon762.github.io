@@ -111,8 +111,11 @@ export const hero = {
 /* ------------------------------------------------------------------ */
 
 export const demo = {
-  /* Section title — the dominant visual element of this block */
-  title: 'DEMO',
+  /* Small section label above the title (matches the other modules) */
+  label: 'DEMO',
+
+  /* Main title of the module — the dominant visual element */
+  title: 'LIVE CAPTURE',
 
   /* One-line description under the title */
   description:
@@ -160,4 +163,137 @@ export const overview = {
    * Once the asset exists, set  '/images/overview/overview.jpg'
    */
   imageSrc: null,
+}
+
+/* ------------------------------------------------------------------ */
+/* 04 — Multimodal Data                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * English only — this module shows no Chinese anywhere.
+ * Anchored by the nav "Dataset" link, hence id="dataset" on the section.
+ */
+export const multimodal = {
+  /* Small section label above the title */
+  label: 'Dataset',
+
+  /* Main title of the module */
+  title: 'MULTIMODAL DATA',
+
+  /* One-line description under the title */
+  description: 'Capturing human behavior from multiple perspectives.',
+
+  /* Text shown inside a column frame while there is no real footage */
+  placeholderLabel: 'VIDEO PLACEHOLDER',
+
+  /**
+   * The three modality columns.
+   * `videoSrc: null` → the column renders the placeholder rectangle.
+   * Drop real clips into public/videos/multimodal/ and set e.g.
+   * '/videos/multimodal/vision.mp4'
+   *
+   * `index` is the small ordinal in the column heading ("01 / VISUAL …").
+   */
+  cards: [
+    {
+      index: '01',
+      title: 'Visual Perception',
+      desc: 'First-person videos capture the environment, objects, and scene dynamics.',
+      tags: 'Ego Vision · Objects · Environment',
+      videoSrc: null,
+    },
+    {
+      index: '02',
+      title: 'Human Motion',
+      desc: 'Motion capture records full-body pose and movement trajectories.',
+      tags: 'Full-body Motion · Pose · IMU',
+      videoSrc: null,
+    },
+    {
+      index: '03',
+      title: 'Spatial Interaction',
+      desc: 'Capturing spatial relationships and interactions between humans, objects, and environments.',
+      tags: 'Human–Object · Interaction · Spatial Context',
+      videoSrc: null,
+    },
+  ],
+}
+
+/* ------------------------------------------------------------------ */
+/* 05 — Download / Open Source                                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * English only — this module shows no Chinese anywhere.
+ * Anchored by the nav "Download" link, hence id="download" on the section.
+ *
+ * Replace `panel.cta.url` with the real Hugging Face dataset URL once it
+ * exists. While it stays null, the "ACCESS DATASET" link is inert (#).
+ */
+export const download = {
+  /* Small section label above the title — matches the nav item */
+  label: 'Download',
+
+  /* Main title of the module */
+  title: 'OPEN SOURCE',
+
+  /* The single wide panel: left content + right CTA, no card fill */
+  panel: {
+    /* Small mono heading inside the panel */
+    heading: 'HUMAN1000 DATASET',
+
+    /* Two body lines */
+    bodyPrimary: 'Explore and access the Human1000 dataset on Hugging Face.',
+    bodySecondary:
+      'A large-scale multimodal dataset capturing human motion, first-person vision, and real-world interactions.',
+
+    /* One-line dataset summary */
+    statsLine: '1000+ HOURS  ·  200+ PEOPLE  ·  500+ TASKS  ·  100+ LOCATIONS',
+
+    /* Right-side CTA. Set `url` to the real Hugging Face dataset page. */
+    cta: {
+      label: 'ACCESS DATASET',
+      url: null,
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/* Representative Tasks                                                */
+/* Page order: rendered between Multimodal Data (04) and Download (05) */
+/* ------------------------------------------------------------------ */
+
+/**
+ * English only — this module shows no Chinese anywhere.
+ * Six representative data-collection tasks, laid out as a 3 × 2 grid.
+ */
+export const representativeTasks = {
+  /* Small section label above the title */
+  label: 'ACTIVITIES',
+
+  /* Main title of the module */
+  title: 'REPRESENTATIVE TASKS',
+
+  /* One-line description under the title */
+  description: 'A glimpse into the diverse activities captured by Human1000.',
+
+  /* Text shown inside a task frame while there is no real footage */
+  placeholderLabel: 'VIDEO',
+
+  /**
+   * The six representative tasks.
+   * `videoSrc: null` → the frame renders the placeholder rectangle.
+   * Drop real clips into public/videos/tasks/ and set e.g.
+   * '/videos/tasks/dishwashing.mp4' to replace a placeholder.
+   *
+   * `index` is the small ordinal in the task heading ("01 / DISHWASHING").
+   */
+  tasks: [
+    { index: '01', title: 'DISHWASHING', videoSrc: null },
+    { index: '02', title: 'SWEEPING', videoSrc: null },
+    { index: '03', title: 'TEA PREPARATION', videoSrc: null },
+    { index: '04', title: 'FOLDING CLOTHES', videoSrc: null },
+    { index: '05', title: 'HANDLING TRAYS', videoSrc: null },
+    { index: '06', title: 'WORKPIECE PROCESSING', videoSrc: null },
+  ],
 }

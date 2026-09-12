@@ -8,11 +8,17 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Account for the fixed 64px navbar on every anchor jump.
+       Container-side offset, robust even if a section forgets scroll-mt. */
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-ink text-white font-sans antialiased;
-    overflow-x: hidden;
+    /* `clip` (not `hidden`) prevents the overflow-y:auto side-effect that
+       would turn <body> into a scroll container and break scroll-margin-top
+       on the last section. */
+    overflow-x: clip;
   }
 
   ::selection {

@@ -4,6 +4,9 @@ import Footer from './components/layout/Footer'
 import HeroSection from './components/sections/HeroSection'
 import DemoSection from './components/sections/DemoSection'
 import OverviewSection from './components/sections/OverviewSection'
+import MultimodalSection from './components/sections/MultimodalSection'
+import RepresentativeTasksSection from './components/sections/RepresentativeTasksSection'
+import DownloadSection from './components/sections/DownloadSection'
 
 /**
  * App is only a composition shell.
@@ -22,6 +25,9 @@ export default function App() {
         <HeroSection />
         <DemoSection />
         <OverviewSection />
+        <MultimodalSection />
+        <RepresentativeTasksSection />
+        <DownloadSection />
         {/* Future sections go here, one per line, in page order. */}
       </main>
 
